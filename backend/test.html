@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket Test</title>
+</head>
+<body>
+  <h1>Socket Test</h1>
+
+  <button onclick="sendMessage()">Send Message</button>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:5050");
+
+    // ask user who they are
+    const userId = prompt("Enter your userId (example: rohit123 or amit456)");
+
+    socket.on("connect", () => {
+      console.log("Connected:", socket.id);
+
+      // register user
+      socket.emit("register", userId);
+    });
+
+    // send message function
+    function sendMessage() {
+      const receiverId = prompt("Enter receiverId:");
+      const message = prompt("Enter message:");
+
+      socket.emit("send_message", {
+        senderId: userId,
+        receiverId: receiverId,
+        message: message
+      });
+    }
+
+    // receive message
+    socket.on("receive_message", (data) => {
+      console.log("Message received:", data);
+      alert(data.senderId + ": " + data.message);
+    });
+  </script>
+</body>
+</html>

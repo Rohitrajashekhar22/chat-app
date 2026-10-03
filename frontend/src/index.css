@@ -1,0 +1,5 @@
+/* ✅ ALWAYS FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Montserrat:wght@100..900&display=swap');
+
+/* ✅ Tailwind v4 */
+@import "tailwindcss";
